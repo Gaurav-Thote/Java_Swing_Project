@@ -27,7 +27,7 @@ public class GuessGame extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfSecretNumber;
 	private JTextField tfGuessedNumber;
-	int secretNumber, number, score=20, highScore;
+	int secretNumber, number, score=100, highScore;
 	private JPanel panel;
 	private JTextField tfMessage;
 	private JLabel lblName;
@@ -67,7 +67,7 @@ public class GuessGame extends JFrame {
 		setResizable(false);
 		getContentPane().setLayout(null);
 		
-		secretNumber = (int) Math.ceil(Math.random() * 20);
+		secretNumber = (int) Math.ceil(Math.random() * 100);
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -94,7 +94,7 @@ public class GuessGame extends JFrame {
 		tfSecretNumber = new JTextField();
 		tfSecretNumber.setHorizontalAlignment(SwingConstants.CENTER);
 		tfSecretNumber.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		tfSecretNumber.setText("?"+secretNumber);
+		tfSecretNumber.setText("?");
 		tfSecretNumber.setBounds(317, 65, 86, 63);
 		panel.add(tfSecretNumber);
 		tfSecretNumber.setColumns(10);
@@ -136,12 +136,13 @@ public class GuessGame extends JFrame {
 		lblInst.setBounds(598, 0, 122, 25);
 		panel.add(lblInst);
 		
-		JButton btnNewButton_1 = new JButton("Restart");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnRestart = new JButton("Restart");
+		btnRestart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				secretNumber = (int) Math.ceil(Math.random() * 20);
+				//resetting game
+				secretNumber = (int) Math.ceil(Math.random() * 100);
 				tfGuessedNumber.setText(""+0);
-				score = 20;
+				score = 100;
 				tfScore.setText(""+score);
 				tfMessage.setText("Start Guessing Again...");
 				panel.setBackground(new Color(0, 0, 0));
@@ -149,12 +150,12 @@ public class GuessGame extends JFrame {
 				game();
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1.setBounds(10, 11, 99, 43);
-		panel.add(btnNewButton_1);
+		btnRestart.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnRestart.setBounds(10, 11, 99, 43);
+		panel.add(btnRestart);
 		
 		tfScore = new JTextField();
-		tfScore.setText("20");
+		tfScore.setText("100");
 		tfScore.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		tfScore.setForeground(new Color(255, 255, 255));
 		tfScore.setBounds(542, 252, 45, 36);
@@ -188,19 +189,17 @@ public class GuessGame extends JFrame {
 	}
 
 	protected void game() {
-		int yes;
-		yes= Integer.parseInt(tfGuessedNumber.getText());
-		number =yes;
-		
+		int inputNumber;
+		inputNumber = Integer.parseInt(tfGuessedNumber.getText());
+		number = inputNumber;
+		//Conditions
 		if (number == secretNumber) {
-			revalidate();
 			panel.setBackground(new Color(0, 255, 0));
-			tfMessage.setForeground(new Color(0, 0, 0));
 			tfSecretNumber.setText(""+secretNumber);
 			tfMessage.setText("Hurray Your Guess is Correct!!!");
 			
 			if(score > highScore) {
-				tfHighScore.setText(""+score);
+				tfHighScore.setText(""+score);//high score set
 				highScore = score;
 				
 			}
