@@ -1,4 +1,4 @@
-package com.guessgame;
+package com.task1.guessgame;
 
 import java.awt.EventQueue;
 
@@ -59,6 +59,7 @@ public class GuessGame extends JFrame {
 	 * Create the frame.
 	 */
 	public GuessGame() {
+		setTitle("Guess Game\r\n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 766, 504);
 		contentPane = new JPanel();
