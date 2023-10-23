@@ -10,12 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JTextField;
-import javax.swing.border.MatteBorder;
-import java.awt.Color;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -23,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+@SuppressWarnings("serial")
 public class Marksheet extends JFrame {
 
 	private JPanel contentPane;
@@ -335,7 +332,6 @@ public class Marksheet extends JFrame {
 	protected void result() {
 		int result;
 		float percent;
-		String grade;
 		
 		result = subMO1 + subMO2 + subMO3 + subMO4 + subMO5 + pracSubMO1 + pracSubMO2 + pracSubMO3 + pracSubMO4 + pracSubMO5;
 		tfMarksObtained.setText(""+result);
