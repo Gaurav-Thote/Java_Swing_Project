@@ -1,33 +1,27 @@
 package com.task1.guessgame;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
-import java.awt.Label;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class GuessGame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfSecretNumber;
 	private JTextField tfGuessedNumber;
 	int secretNumber, number, score=100, highScore;
+	boolean isPlaying;
 	private JPanel panel;
 	private JTextField tfMessage;
 	private JLabel lblName;
@@ -69,7 +63,7 @@ public class GuessGame extends JFrame {
 		getContentPane().setLayout(null);
 		
 		secretNumber = (int) Math.ceil(Math.random() * 100);
-		
+		isPlaying = true;
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -142,12 +136,14 @@ public class GuessGame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//resetting game
 				secretNumber = (int) Math.ceil(Math.random() * 100);
+				tfSecretNumber.setText("?");
 				tfGuessedNumber.setText(""+0);
 				score = 100;
 				tfScore.setText(""+score);
 				tfMessage.setText("Start Guessing Again...");
 				panel.setBackground(new Color(0, 0, 0));
 				tfScore.setText(""+score);
+				isPlaying = true;
 				game();
 			}
 		});
@@ -190,7 +186,9 @@ public class GuessGame extends JFrame {
 	}
 
 	protected void game() {
-		int inputNumber;
+		if(isPlaying) {
+			int inputNumber;
+		
 		inputNumber = Integer.parseInt(tfGuessedNumber.getText());
 		number = inputNumber;
 		//Conditions
@@ -198,7 +196,7 @@ public class GuessGame extends JFrame {
 			panel.setBackground(new Color(0, 255, 0));
 			tfSecretNumber.setText(""+secretNumber);
 			tfMessage.setText("Hurray Your Guess is Correct!!!");
-			
+			isPlaying = false;
 			if(score > highScore) {
 				tfHighScore.setText(""+score);//high score set
 				highScore = score;
@@ -217,6 +215,7 @@ public class GuessGame extends JFrame {
 		}else if(number == 0){
 			tfMessage.setText("Start Guessing Again...");
 		}
+	}
 	}
 }
 
