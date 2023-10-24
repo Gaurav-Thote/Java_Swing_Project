@@ -212,10 +212,10 @@ public class GenerateCard extends JFrame {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(contentPane, "Your Card Number is "+cardNumber);
-//			dispose();
-//			AtmInterface ai = new AtmInterface();
-//			ai.setVisible(true);
+			JOptionPane.showMessageDialog(contentPane, "Last four digit of your Card is "+cardNumber);
+			dispose();
+			AtmInterface ai = new AtmInterface();
+			ai.setVisible(true);
 			}
 
 	}
