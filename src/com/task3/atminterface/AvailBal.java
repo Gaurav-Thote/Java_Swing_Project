@@ -86,6 +86,7 @@ public class AvailBal extends JFrame {
 		tfAvailBal.setBounds(117, 74, 167, 39);
 		tfAvailBal.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 		tfAvailBal.setOpaque(false);
+		tfAvailBal.setEditable(false);
 		Close.add(tfAvailBal);
 		tfAvailBal.setColumns(10);
 	}

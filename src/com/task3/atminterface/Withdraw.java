@@ -135,7 +135,7 @@ public class Withdraw extends JFrame {
 			ab.setVisible(true);
 		}
 		else {
-//			JOptionPane.showMessageDialog(contentPane, "Insufficient Fund");
+			JOptionPane.showMessageDialog(contentPane, "Insufficient Fund");
 			dispose();
 			AtmInterface ai = new AtmInterface();
 			ai.setVisible(true);

@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Cursor;
 
 @SuppressWarnings("serial")
 public class AtmInterface extends JFrame {
@@ -89,6 +90,7 @@ public class AtmInterface extends JFrame {
 		panel.add(lblNewCard);
 		
 		JLabel lblClickHere = new JLabel("Click here");
+		lblClickHere.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblClickHere.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -133,8 +135,8 @@ public class AtmInterface extends JFrame {
 			
 		try {
 			connection();
-			cardNumber = Integer.parseInt(tfCardNumber.getText(cardNumber, 4));
-			pin = Integer.parseInt(tfPin.getText(pin, 4));
+			cardNumber = Integer.parseInt(tfCardNumber.getText());
+			pin = Integer.parseInt(tfPin.getText());
 			while (rs.next()) {
 				u = rs.getInt(8);
 				p = rs.getInt(6);
@@ -148,9 +150,7 @@ public class AtmInterface extends JFrame {
 				}
 				
 			}
-//			if (!userName.equals(u)) {
-//				JOptionPane.showMessageDialog(contentPane, "UserName or Password is incorrect");						
-//			}
+
 		}catch(Exception ae) {
 			ae.printStackTrace();
 		}

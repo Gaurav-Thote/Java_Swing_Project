@@ -154,7 +154,7 @@ public class GenerateCard extends JFrame {
 		pin = Long.parseLong(tfPin.getText().trim()); 
 		bal = (int)Math.ceil(Math.random() * 2000);
 		cardNumber = (int)Math.ceil(Math.random() * 2000);
-
+//		JOptionPane.showMessageDialog(contentPane, cardNumber);
 		if (fName.isEmpty()) {
 			JOptionPane.showMessageDialog(contentPane, "First Name Required");
 			tfFName.requestFocus();
@@ -191,7 +191,8 @@ public class GenerateCard extends JFrame {
 			return;
 		}
 		if (cardNumber < 999) {
-			cardNumber = (int)Math.ceil(Math.random() * 2000);
+			cardNumber = 2000 + cardNumber;
+//			JOptionPane.showMessageDialog(contentPane, cardNumber);
 		}
 		if(pin > 999 && pin < 10000) {
 			
@@ -212,9 +213,9 @@ public class GenerateCard extends JFrame {
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(contentPane, "Your Card Number is "+cardNumber);
-			dispose();
-			AtmInterface ai = new AtmInterface();
-			ai.setVisible(true);
+//			dispose();
+//			AtmInterface ai = new AtmInterface();
+//			ai.setVisible(true);
 			}
 
 	}
