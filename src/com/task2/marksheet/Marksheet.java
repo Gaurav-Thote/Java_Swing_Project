@@ -38,6 +38,7 @@ public class Marksheet extends JFrame {
 	private JTextField tfPercentObtained;
 	private JTextField tfGradeObtained;
 	private JTextField tfResult;
+	private JTextField tfName;
 
 	/**
 	 * Launch the application.
@@ -85,7 +86,7 @@ public class Marksheet extends JFrame {
 		
 		JPanel theoryExam = new JPanel();
 		theoryExam.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		theoryExam.setBounds(45, 85, 371, 450);
+		theoryExam.setBounds(45, 138, 371, 397);
 		panel.add(theoryExam);
 		theoryExam.setLayout(null);
 		
@@ -153,7 +154,7 @@ public class Marksheet extends JFrame {
 		JPanel practicalExam = new JPanel();
 		practicalExam.setLayout(null);
 		practicalExam.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		practicalExam.setBounds(483, 85, 371, 450);
+		practicalExam.setBounds(483, 138, 371, 397);
 		panel.add(practicalExam);
 		
 		JLabel lblPracSubject1 = new JLabel("Subject 1:-");
@@ -305,6 +306,17 @@ public class Marksheet extends JFrame {
 		lblShowTotalMarks.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblShowTotalMarks.setBounds(348, 62, 46, 38);
 		result.add(lblShowTotalMarks);
+		
+		JLabel lblName = new JLabel("Name:-\r\n");
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblName.setBounds(280, 85, 74, 25);
+		panel.add(lblName);
+		
+		tfName = new JTextField();
+		tfName.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		tfName.setBounds(350, 85, 221, 25);
+		panel.add(tfName);
+		tfName.setColumns(10);
 	}
 
 	protected void passFail() {
