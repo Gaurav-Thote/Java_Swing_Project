@@ -1,4 +1,4 @@
-package com.task1.guessgame;
+package com.guessgame;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;

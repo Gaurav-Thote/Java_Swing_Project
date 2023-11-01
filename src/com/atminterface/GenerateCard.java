@@ -1,4 +1,4 @@
-package com.task3.atminterface;
+package com.atminterface;
 
 import java.awt.EventQueue;
 

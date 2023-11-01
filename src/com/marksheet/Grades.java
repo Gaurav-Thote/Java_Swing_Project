@@ -1,15 +1,16 @@
-package com.task2.marksheet;
+package com.marksheet;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
+import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class Grades extends JFrame {
 
 	private JPanel contentPane;
@@ -34,9 +35,11 @@ public class Grades extends JFrame {
 	 * Create the frame.
 	 */
 	public Grades() {
+		setTitle("Marksheet");
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 621, 508);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.GRAY);
 		contentPane.setBorder(null);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -46,6 +49,7 @@ public class Grades extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.CYAN);
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.setBounds(10, 11, 585, 447);
 		contentPane.add(panel);

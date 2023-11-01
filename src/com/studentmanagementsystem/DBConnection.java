@@ -1,4 +1,4 @@
-package com.task5.studentmanagementsystem;
+package com.studentmanagementsystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

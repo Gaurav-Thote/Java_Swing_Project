@@ -1,37 +1,36 @@
-package com.task3.atminterface;
+package com.atminterface;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
-import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class Withdraw extends JFrame {
+public class Deposit extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField tfWithdraw;
+	private JTextField tfDeposit;
 	Connection con;
 	PreparedStatement pst;
 	ResultSet rs;
 	int newBalance, bals;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -39,7 +38,7 @@ public class Withdraw extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Withdraw frame = new Withdraw();
+					Deposit frame = new Deposit();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,12 +50,14 @@ public class Withdraw extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Withdraw() {
+	public Deposit() {
 		setTitle("ATM Interface");
+		setBackground(new Color(128, 128, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 380);
+		setBounds(100, 100, 450, 375);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(128, 128, 255));
+		contentPane.setForeground(new Color(128, 128, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -65,52 +66,53 @@ public class Withdraw extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		tfWithdraw = new JTextField();
-		tfWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		tfWithdraw.setColumns(10);
-		tfWithdraw.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Withdraw Amount", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		tfWithdraw.setBounds(116, 128, 195, 54);
-		contentPane.add(tfWithdraw);
+		JLabel lblDeposit = new JLabel("Deposit");
+		lblDeposit.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblDeposit.setBounds(162, 47, 102, 31);
+		contentPane.add(lblDeposit);
 		
-		JLabel lblWithdraw = new JLabel("Withdraw");
-		lblWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		lblWithdraw.setBounds(157, 38, 102, 31);
-		contentPane.add(lblWithdraw);
+		tfDeposit = new JTextField();
+		tfDeposit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tfDeposit.setColumns(10);
+		tfDeposit.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Amount", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		tfDeposit.setBounds(113, 137, 195, 54);
+		contentPane.add(tfDeposit);
 		
-		JButton btnWithdraw_1 = new JButton("Withdraw");
-		btnWithdraw_1.addActionListener(new ActionListener() {
+		JButton btnDeposit_1 = new JButton("Deposit");
+		btnDeposit_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				withdraw();
+				deposit();
 			}
 		});
-		btnWithdraw_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnWithdraw_1.setBounds(71, 245, 126, 41);
-		contentPane.add(btnWithdraw_1);
+		btnDeposit_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnDeposit_1.setBounds(69, 241, 126, 39);
+		contentPane.add(btnDeposit_1);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				AtmInterface ai = new AtmInterface();
-				ai.setVisible(true);
+			dispose();
+			AtmInterface ai = new AtmInterface();
+			ai.setVisible(true);
 			}
 		});
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnCancel.setBounds(230, 244, 126, 41);
+		btnCancel.setBounds(231, 239, 126, 41);
 		contentPane.add(btnCancel);
 	}
-	protected void withdraw() {
-		int withdraw;
+
+	protected void deposit() {
+		int deposit;
 		int ids = AtmInterface.id;
-		withdraw = Integer.parseInt(tfWithdraw.getText());
-		newBalance = bal() - withdraw;
+		deposit = Integer.parseInt(tfDeposit.getText());
+		newBalance = bal() + deposit;
 //		JOptionPane.showMessageDialog(contentPane, newBalance);
-		if (withdraw < 0) {
+		if (deposit < 0) {
 			JOptionPane.showMessageDialog(contentPane, "Add amount more than 1");
-			tfWithdraw.requestFocus();
+			tfDeposit.requestFocus();
 			return;
 		}
-		if(withdraw < bal()) {
+		
 			try {
 				
 				Class.forName("com.mysql.cj.jdbc.Driver");
@@ -132,14 +134,9 @@ public class Withdraw extends JFrame {
 			}
 			dispose();
 			AvailBal ab = new AvailBal();
+			ab.tfMessage.setText("Thank you for banking with us");
 			ab.setVisible(true);
-		}
-		else {
-			JOptionPane.showMessageDialog(contentPane, "Insufficient Fund");
-			dispose();
-			AtmInterface ai = new AtmInterface();
-			ai.setVisible(true);
-		}
+		
 	}
 
 	private int bal() {
@@ -182,4 +179,8 @@ protected void connection() {
 		}
 	
 	}
+
 }
+
+	
+

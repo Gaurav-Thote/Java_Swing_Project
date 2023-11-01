@@ -1,4 +1,4 @@
-package com.task5.studentmanagementsystem;
+package com.studentmanagementsystem;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;

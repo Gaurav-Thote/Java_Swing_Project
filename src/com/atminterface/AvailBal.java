@@ -1,4 +1,4 @@
-package com.task3.atminterface;
+package com.atminterface;
 
 import java.awt.EventQueue;
 
@@ -29,6 +29,7 @@ public class AvailBal extends JFrame {
 	PreparedStatement pst;
 	ResultSet rs;
 	int  bals;
+	JTextField tfMessage;
 	/**
 	 * Launch the application.
 	 */
@@ -89,6 +90,16 @@ public class AvailBal extends JFrame {
 		tfAvailBal.setEditable(false);
 		Close.add(tfAvailBal);
 		tfAvailBal.setColumns(10);
+		
+		tfMessage = new JTextField();
+		tfMessage.setOpaque(false);
+		tfMessage.setHorizontalAlignment(SwingConstants.CENTER);
+		tfMessage.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		tfMessage.setEditable(false);
+		tfMessage.setColumns(10);
+		tfMessage.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+		tfMessage.setBounds(10, 153, 414, 39);
+		Close.add(tfMessage);
 	}
 	private int bal() {
 		try {
@@ -130,5 +141,4 @@ protected void connection() {
 		}
 	
 	}
-
 }

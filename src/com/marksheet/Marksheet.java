@@ -1,7 +1,6 @@
-package com.task2.marksheet;
+package com.marksheet;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class Marksheet extends JFrame {
@@ -60,10 +60,11 @@ public class Marksheet extends JFrame {
 	 * Create the frame.
 	 */
 	public Marksheet() {
-		setTitle("Marksheet\r\n");
+		setTitle("Marksheet");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 950, 750);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(64, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -73,6 +74,7 @@ public class Marksheet extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(210, 249, 204));
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBounds(10, 11, 914, 689);
 		contentPane.add(panel);
@@ -85,6 +87,7 @@ public class Marksheet extends JFrame {
 		panel.add(lblMarksheet);
 		
 		JPanel theoryExam = new JPanel();
+		theoryExam.setBackground(Color.LIGHT_GRAY);
 		theoryExam.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		theoryExam.setBounds(45, 138, 371, 397);
 		panel.add(theoryExam);
@@ -152,6 +155,7 @@ public class Marksheet extends JFrame {
 		theoryExam.add(tfSub5);
 		
 		JPanel practicalExam = new JPanel();
+		practicalExam.setBackground(Color.LIGHT_GRAY);
 		practicalExam.setLayout(null);
 		practicalExam.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		practicalExam.setBounds(483, 138, 371, 397);
@@ -219,6 +223,7 @@ public class Marksheet extends JFrame {
 		practicalExam.add(tfPracSub1);
 		
 		JPanel result = new JPanel();
+		result.setBackground(Color.LIGHT_GRAY);
 		result.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		result.setBounds(45, 546, 809, 132);
 		panel.add(result);
@@ -322,18 +327,23 @@ public class Marksheet extends JFrame {
 	protected void passFail() {
 		if(subMO1 + pracSubMO1 < 40) {
 			tfResult.setText("Fail");
+			tfGradeObtained.setText("F");
 		}
 		else if(subMO2 + pracSubMO2 < 40) {
 			tfResult.setText("Fail");
+			tfGradeObtained.setText("F");
 		}
 		else if(subMO3 + pracSubMO3 < 40) {
 			tfResult.setText("Fail");
+			tfGradeObtained.setText("F");
 		}
 		else if(subMO4 + pracSubMO4 < 40) {
 			tfResult.setText("Fail");
+			tfGradeObtained.setText("F");
 		}
 		else if(subMO5 + pracSubMO5 < 40) {
 			tfResult.setText("Fail");
+			tfGradeObtained.setText("F");
 		}
 		else {
 			tfResult.setText("Pass");
