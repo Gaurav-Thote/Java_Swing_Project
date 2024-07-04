@@ -10,22 +10,22 @@ public class DBConnection {
 	static Connection con;
 	static PreparedStatement pst;
 	static ResultSet rs;
-	
+
 	public static void connection() {
-		
-		//Open Database Connection
+
+		// Open Database Connection
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account","root","");
-		
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account", "root", "");
+
 		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void closeDatabase() {
-		//close database connection
+		// close database connection
 		try {
 			con.close();
 		} catch (SQLException e) {
@@ -35,4 +35,3 @@ public class DBConnection {
 	}
 
 }
-

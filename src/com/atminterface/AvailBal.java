@@ -28,8 +28,9 @@ public class AvailBal extends JFrame {
 	Connection con;
 	PreparedStatement pst;
 	ResultSet rs;
-	int  bals;
+	int bals;
 	JTextField tfMessage;
+
 	/**
 	 * Launch the application.
 	 */
@@ -62,12 +63,12 @@ public class AvailBal extends JFrame {
 
 		setContentPane(Close);
 		Close.setLayout(null);
-		
+
 		JLabel lblAvailableBalance = new JLabel("Available Balance");
 		lblAvailableBalance.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblAvailableBalance.setBounds(117, 32, 195, 31);
 		Close.add(lblAvailableBalance);
-		
+
 		JButton btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -79,66 +80,68 @@ public class AvailBal extends JFrame {
 		btnClose.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnClose.setBounds(152, 203, 96, 31);
 		Close.add(btnClose);
-		
+
 		tfAvailBal = new JTextField();
-		tfAvailBal.setText(""+bal());
+		tfAvailBal.setText("" + bal());
 		tfAvailBal.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		tfAvailBal.setHorizontalAlignment(SwingConstants.CENTER);
 		tfAvailBal.setBounds(117, 74, 167, 39);
-		tfAvailBal.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+		tfAvailBal.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		tfAvailBal.setOpaque(false);
 		tfAvailBal.setEditable(false);
 		Close.add(tfAvailBal);
 		tfAvailBal.setColumns(10);
-		
+
 		tfMessage = new JTextField();
 		tfMessage.setOpaque(false);
 		tfMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		tfMessage.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tfMessage.setEditable(false);
 		tfMessage.setColumns(10);
-		tfMessage.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+		tfMessage.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		tfMessage.setBounds(10, 153, 414, 39);
 		Close.add(tfMessage);
 	}
+
 	private int bal() {
 		try {
 			connection();
-			int u= AtmInterface.u, p= AtmInterface.p,cardNumber= AtmInterface.u, pin= AtmInterface.p;
-			
+			int u = AtmInterface.u, p = AtmInterface.p, cardNumber = AtmInterface.u, pin = AtmInterface.p;
+
 			while (rs.next()) {
-				
+
 				bals = rs.getInt(7);
 //				JOptionPane.showMessageDialog(contentPane, bals);
 				u = rs.getInt(8);
 				p = rs.getInt(6);
-				
-				if (cardNumber == u && pin == p) {	
+
+				if (cardNumber == u && pin == p) {
 //					JOptionPane.showMessageDialog(contentPane, "Login Successfully");
-					
+
 					break;
 				}
-				
+
 			}
-			
-		}catch(Exception ae) {
+
+		} catch (Exception ae) {
 			ae.printStackTrace();
 		}
 		return bals;
 	}
-protected void connection() {
-		
+
+	protected void connection() {
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account", "root", "");
 			pst = con.prepareStatement("select * from atm");
 			rs = pst.executeQuery();
-			//JOptionPane.showMessageDialog(contentPane, "DataBase Connected");
-			
+			// JOptionPane.showMessageDialog(contentPane, "DataBase Connected");
+
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-	
+
 	}
 }

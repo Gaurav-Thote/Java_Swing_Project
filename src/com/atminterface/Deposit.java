@@ -30,7 +30,7 @@ public class Deposit extends JFrame {
 	PreparedStatement pst;
 	ResultSet rs;
 	int newBalance, bals;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -65,19 +65,21 @@ public class Deposit extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblDeposit = new JLabel("Deposit");
 		lblDeposit.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblDeposit.setBounds(162, 47, 102, 31);
 		contentPane.add(lblDeposit);
-		
+
 		tfDeposit = new JTextField();
 		tfDeposit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tfDeposit.setColumns(10);
-		tfDeposit.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Amount", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		tfDeposit.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Deposit Amount", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		tfDeposit.setBounds(113, 137, 195, 54);
 		contentPane.add(tfDeposit);
-		
+
 		JButton btnDeposit_1 = new JButton("Deposit");
 		btnDeposit_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -87,13 +89,13 @@ public class Deposit extends JFrame {
 		btnDeposit_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnDeposit_1.setBounds(69, 241, 126, 39);
 		contentPane.add(btnDeposit_1);
-		
+
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			dispose();
-			AtmInterface ai = new AtmInterface();
-			ai.setVisible(true);
+				dispose();
+				AtmInterface ai = new AtmInterface();
+				ai.setVisible(true);
 			}
 		});
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -112,75 +114,72 @@ public class Deposit extends JFrame {
 			tfDeposit.requestFocus();
 			return;
 		}
-		
-			try {
-				
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account","root","");
-				pst = con.prepareStatement("update atm set bal=? where id = ?");
-				pst.setLong(1, newBalance);
-				pst.setInt(2, ids);
-				pst.executeUpdate();
-				
-				
+
+		try {
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account", "root", "");
+			pst = con.prepareStatement("update atm set bal=? where id = ?");
+			pst.setLong(1, newBalance);
+			pst.setInt(2, ids);
+			pst.executeUpdate();
+
 //				JOptionPane.showMessageDialog(contentPane, "Deposit successfull");
-				
-			} catch (SQLException e1) {
-				
-				e1.printStackTrace();
-			} catch (ClassNotFoundException e1) {
-				
-				e1.printStackTrace();
-			}
-			dispose();
-			AvailBal ab = new AvailBal();
-			ab.tfMessage.setText("Thank you for banking with us");
-			ab.setVisible(true);
-		
+
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+
+			e1.printStackTrace();
+		}
+		dispose();
+		AvailBal ab = new AvailBal();
+		ab.tfMessage.setText("Thank you for banking with us");
+		ab.setVisible(true);
+
 	}
 
 	private int bal() {
 		try {
 			connection();
-			int u= AtmInterface.u, p= AtmInterface.p,cardNumber= AtmInterface.u, pin= AtmInterface.p;
-			
+			int u = AtmInterface.u, p = AtmInterface.p, cardNumber = AtmInterface.u, pin = AtmInterface.p;
+
 			while (rs.next()) {
-				
+
 				bals = rs.getInt(7);
 //				JOptionPane.showMessageDialog(contentPane, bals);
 				u = rs.getInt(8);
 				p = rs.getInt(6);
-				
-				if (cardNumber == u && pin == p) {	
+
+				if (cardNumber == u && pin == p) {
 //					JOptionPane.showMessageDialog(contentPane, "Login Successfully");
-					
+
 					break;
 				}
-				
+
 			}
-			
-		}catch(Exception ae) {
+
+		} catch (Exception ae) {
 			ae.printStackTrace();
 		}
 		return bals;
 	}
-protected void connection() {
-		
+
+	protected void connection() {
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account", "root", "");
 			pst = con.prepareStatement("select * from atm");
 			rs = pst.executeQuery();
-			//JOptionPane.showMessageDialog(contentPane, "DataBase Connected");
-			
+			// JOptionPane.showMessageDialog(contentPane, "DataBase Connected");
+
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-	
+
 	}
 
 }
-
-	
-

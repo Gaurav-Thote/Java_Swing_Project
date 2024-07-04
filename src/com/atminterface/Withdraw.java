@@ -64,19 +64,21 @@ public class Withdraw extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		tfWithdraw = new JTextField();
 		tfWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		tfWithdraw.setColumns(10);
-		tfWithdraw.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Withdraw Amount", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		tfWithdraw.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Withdraw Amount", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		tfWithdraw.setBounds(116, 128, 195, 54);
 		contentPane.add(tfWithdraw);
-		
+
 		JLabel lblWithdraw = new JLabel("Withdraw");
 		lblWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblWithdraw.setBounds(157, 38, 102, 31);
 		contentPane.add(lblWithdraw);
-		
+
 		JButton btnWithdraw_1 = new JButton("Withdraw");
 		btnWithdraw_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,7 +88,7 @@ public class Withdraw extends JFrame {
 		btnWithdraw_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnWithdraw_1.setBounds(71, 245, 126, 41);
 		contentPane.add(btnWithdraw_1);
-		
+
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -99,6 +101,7 @@ public class Withdraw extends JFrame {
 		btnCancel.setBounds(230, 244, 126, 41);
 		contentPane.add(btnCancel);
 	}
+
 	protected void withdraw() {
 		int withdraw;
 		int ids = AtmInterface.id;
@@ -110,32 +113,30 @@ public class Withdraw extends JFrame {
 			tfWithdraw.requestFocus();
 			return;
 		}
-		if(withdraw < bal()) {
+		if (withdraw < bal()) {
 			try {
-				
+
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account","root","");
+				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account", "root", "");
 				pst = con.prepareStatement("update atm set bal=? where id = ?");
 				pst.setLong(1, newBalance);
 				pst.setInt(2, ids);
 				pst.executeUpdate();
-				
-				
+
 //				JOptionPane.showMessageDialog(contentPane, "Deposit successfull");
-				
+
 			} catch (SQLException e1) {
-				
+
 				e1.printStackTrace();
 			} catch (ClassNotFoundException e1) {
-				
+
 				e1.printStackTrace();
 			}
 			dispose();
 			AvailBal ab = new AvailBal();
 			ab.tfMessage.setText("Please collect your cash");
 			ab.setVisible(true);
-		}
-		else {
+		} else {
 			JOptionPane.showMessageDialog(contentPane, "Insufficient Fund");
 			dispose();
 			AtmInterface ai = new AtmInterface();
@@ -146,41 +147,42 @@ public class Withdraw extends JFrame {
 	private int bal() {
 		try {
 			connection();
-			int u= AtmInterface.u, p= AtmInterface.p,cardNumber= AtmInterface.u, pin= AtmInterface.p;
-			
+			int u = AtmInterface.u, p = AtmInterface.p, cardNumber = AtmInterface.u, pin = AtmInterface.p;
+
 			while (rs.next()) {
-				
+
 				bals = rs.getInt(7);
 //				JOptionPane.showMessageDialog(contentPane, bals);
 				u = rs.getInt(8);
 				p = rs.getInt(6);
-				
-				if (cardNumber == u && pin == p) {	
+
+				if (cardNumber == u && pin == p) {
 //					JOptionPane.showMessageDialog(contentPane, "Login Successfully");
-					
+
 					break;
 				}
-				
+
 			}
-			
-		}catch(Exception ae) {
+
+		} catch (Exception ae) {
 			ae.printStackTrace();
 		}
 		return bals;
 	}
-protected void connection() {
-		
+
+	protected void connection() {
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account","root","");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/account", "root", "");
 			pst = con.prepareStatement("select * from atm");
 			rs = pst.executeQuery();
-			//JOptionPane.showMessageDialog(contentPane, "DataBase Connected");
-			
+			// JOptionPane.showMessageDialog(contentPane, "DataBase Connected");
+
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-	
+
 	}
 }

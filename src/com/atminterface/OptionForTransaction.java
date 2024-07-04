@@ -50,7 +50,7 @@ public class OptionForTransaction extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton btnDeposit = new JButton("Deposit");
 		btnDeposit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -62,20 +62,20 @@ public class OptionForTransaction extends JFrame {
 		btnDeposit.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnDeposit.setBounds(29, 220, 163, 23);
 		contentPane.add(btnDeposit);
-		
+
 		JButton tbnWithdraw = new JButton("Withdraw");
 		tbnWithdraw.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				Withdraw wd = new Withdraw();
 				wd.setVisible(true);
-			
+
 			}
 		});
 		tbnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tbnWithdraw.setBounds(374, 220, 163, 23);
 		contentPane.add(tbnWithdraw);
-		
+
 		JButton btnAvailBal = new JButton("Available Balance");
 		btnAvailBal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -87,7 +87,7 @@ public class OptionForTransaction extends JFrame {
 		btnAvailBal.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnAvailBal.setBounds(29, 290, 163, 23);
 		contentPane.add(btnAvailBal);
-		
+
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -99,7 +99,7 @@ public class OptionForTransaction extends JFrame {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnCancel.setBounds(374, 292, 163, 23);
 		contentPane.add(btnCancel);
-		
+
 		JLabel lblWelcome = new JLabel("Welcome To ATM");
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 25));
