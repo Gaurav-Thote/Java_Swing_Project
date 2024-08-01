@@ -136,7 +136,7 @@ public class Withdraw extends JFrame {
 			AvailBal ab = new AvailBal();
 			ab.tfMessage.setText("Please collect your cash");
 			ab.setVisible(true);
-		} else if (withdraw % 100 != 0) {
+		} else if (withdraw < bal() && withdraw % 100 != 0) {
 			JOptionPane.showMessageDialog(contentPane, "Amount must be in multiple of 100");
 			dispose();
 			AtmInterface ai = new AtmInterface();
