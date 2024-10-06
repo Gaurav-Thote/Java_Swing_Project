@@ -430,7 +430,7 @@ public class StudentManagementSystem {
 				if (id == ids) {
 					break;
 				}
-			}
+			}rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
